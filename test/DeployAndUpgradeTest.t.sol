@@ -22,8 +22,13 @@ contract DeployAndUpgradeTest is Test {
         proxy = deployer.run(); // right now point to BoxV1
     }
 
-    function test_proxyStartAsV1() public {
+    function test_proxyStartAsV1() public view {
         assertEq(BoxV1(proxy).version(), 1);
+        // or we can use this -
+        // assertEq(BoxV2(proxy).version(), 1);
+        // or
+        // (bool success, bytes memory data) = proxy.call(abi.encodeWithSignature("version()"));
+        // console.logBytes(data);
     }
 
     function test_Upgrade() public {
